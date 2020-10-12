@@ -25,16 +25,21 @@ class HomeTabWidget extends StatefulWidget {
 
   ValueChanged<TabInfo> onTabChange;
 
+  int initIndex = 0;
+
   HomeTabWidget({this.mTabs,
     this.tabTextStyleSelected,
     this.tabTextStyleNormal,
     this.themeColor,
     this.appBar,
-    this.onTabChange
+    this.onTabChange,
+    this.initIndex
   });
 
   @override
   State<StatefulWidget> createState() => _HomeTabWidgetState();
+
+
 }
 
 ///
@@ -53,6 +58,17 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
 
   int _tabIndex = 0;
   var _body;
+
+  _HomeTabWidgetState() {
+
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    _tabIndex = widget.initIndex;
+  }
 
   Image _getImage(path) {
     return Image.asset(path, width: 20.0, height: 20.0);
@@ -82,6 +98,9 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     _body = IndexedStack(
       children: widget.mTabs.map((e) => e.content).toList(),
       index: _tabIndex,
@@ -92,11 +111,8 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
           primaryColor: widget.themeColor
       ),
       home: Scaffold(//布局结构
-        appBar: AppBar(//选中每一项的标题和图标设置
-            title: Text(widget.mTabs[_tabIndex].name,
-                style: TextStyle(color: Colors.white)),
-            iconTheme: IconThemeData(color: Colors.white)
-        ),
+        appBar: widget.appBar,
+//        appBar:
 
         body: _body,
 

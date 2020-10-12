@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo001/LoginPage.dart';
 
+import 'LoginPage.dart';
+
 class HomeListPage extends StatefulWidget {
   @override
   createState() => new MyHomePageState();
@@ -34,9 +36,18 @@ class MyHomePageState extends State<HomeListPage> {
               ),
             ),
             onTap: () async {
-              final result = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                return LoginPage(title:"我是从上一层带过来的数据：小蜗");
-              }));
+
+              
+//              Navigator.push(context, route)
+
+              // 启动一个新界面
+              var result = await Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(title: "some Data",)));
+              print("LoginPage back, back result is:$result");
+              
+//              final result = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+//                return LoginPage(title:"我是从上一层带过来的数据：小蜗");
+//              }));
+
               if (result != null && result == "refresh") {//做一些进入处理操作，比如加载效果
 //                Constants.eventBus.fire(LoginEvent());
               }

@@ -55,7 +55,8 @@ class LoginPageState extends State<LoginPage>{
         appBar: AppBar(//设置标题
             title: Text("登录",
                 style: TextStyle(color: Colors.white)),
-            iconTheme: IconThemeData(color: Colors.white)
+            iconTheme: IconThemeData(color: Colors.white),
+
         ),
         body: Form(//页面内容
             child: ListView(
