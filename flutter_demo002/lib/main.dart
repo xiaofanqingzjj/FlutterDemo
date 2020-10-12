@@ -4,6 +4,7 @@ import 'package:flutter_demo001/HomeListPage.dart';
 import 'package:flutter_demo001/dongtai.dart';
 import 'package:flutter_demo001/mywidgets/testmenu_widget.dart';
 import 'package:flutter_demo001/test/TestListView.dart';
+import 'package:flutter_demo001/test/test_menus.dart';
 
 import 'mywidgets/hometab.dart';
 
@@ -26,14 +27,12 @@ class App extends StatelessWidget {
 class MyHome extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return  MyHomeState();
+    return _MyHomeState();
   }
 }
 
 
-class MyHomeState extends State<MyHome> {
-
-
+class _MyHomeState extends State<MyHome> {
   String title = "";
 
   int _initIndex = 1;
@@ -56,26 +55,12 @@ class MyHomeState extends State<MyHome> {
         content: dongtai()
     ),
     TabInfo(
-        name: "发现1",
+        name: "测试",
         icons: {
           "selected": "images/ic_nav_discover_actived.png",
           "normal": "images/ic_nav_discover_normal.png"
         },
-        content: MenuWidget(menus : [
-          Menu(
-            name: "ListView",
-          ),
-          Menu(
-            name: "Test Navigator",
-            onClick: (menu, context) {
-              Navigator.push(context, MaterialPageRoute(builder: (context){
-                return PageWidget();
-              }));
-            }
-
-          )
-
-        ])
+        content: TestMenu()
     ),
     TabInfo(
         name: "我的",
