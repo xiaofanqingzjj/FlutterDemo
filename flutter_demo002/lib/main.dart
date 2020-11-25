@@ -5,10 +5,13 @@ import 'package:flutter_demo001/dongtai.dart';
 import 'package:flutter_demo001/mywidgets/testmenu_widget.dart';
 import 'package:flutter_demo001/test/TestListView.dart';
 import 'package:flutter_demo001/test/test_menus.dart';
+import 'package:flutter_demo001/test/test_widget.dart';
 
 import 'mywidgets/hometab.dart';
 
 void main() {
+
+  // runApp(A());
   runApp(new App());
 
   // 可以在这里初始化程序信息
@@ -28,6 +31,11 @@ class MyHome extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _MyHomeState();
+  }
+
+  @override
+  StatefulElement createElement() {
+    return super.createElement();
   }
 }
 

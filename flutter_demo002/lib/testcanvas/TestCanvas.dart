@@ -4,20 +4,12 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_demo001/mywidgets/base_page.dart';
+import 'package:flutter_demo001/mywidgets/base_page.dart' as base_page;
 
 
-void test() {
-  CustomPaint cp;
-}
 
 
-class MyPaint extends CustomPaint {
-
-}
-
-
-class TestPaint extends Page {
+class TestPaint extends base_page.Page {
 
   void test() {
     Container();
@@ -27,6 +19,8 @@ class TestPaint extends Page {
   TestPaint() {
     title = "Test";
     content = Container(
+      color: Colors.blue,
+      margin: EdgeInsets.only(top: 100),
       child: CustomPaint(
         foregroundPainter: MyPainter(),
       ),
@@ -34,11 +28,6 @@ class TestPaint extends Page {
   }
 }
 
-void test1() {
-
-  RenderObjectWidget row;
-//  RenderBox
-}
 
 
 ///
@@ -52,9 +41,10 @@ class MyPainter extends CustomPainter {
 
     /// 初始化画笔
     var paint = Paint()
-      ..strokeWidth = 25.0
+      ..strokeWidth = 2.0
+      ..style = PaintingStyle.stroke
       ..color = Colors.red;
-
+    //
     /// 通过canvas画一条直线
     /// 这里可以根据需要绘制圆形,矩形等等
 //    canvas.drawLine(Offset(95, 0), Offset(95, 300), paint);

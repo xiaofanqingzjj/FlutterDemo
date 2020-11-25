@@ -29,8 +29,10 @@ class _ProgressState extends State<MyProgress> with TickerProviderStateMixin {
     super.initState();
     for (int i = 0; i < widget.count; i++) {
 
-      var animationController = new AnimationController(vsync: this,
+      var animationController = new AnimationController(
           duration: Duration(milliseconds: widget.milliseconds * widget.count));
+
+
       animationController.value=0.8*i/widget.count;
       _animationControllers.add(animationController);
       Animation<double> animation = new Tween(begin: 0.1, end: 1.9).animate(

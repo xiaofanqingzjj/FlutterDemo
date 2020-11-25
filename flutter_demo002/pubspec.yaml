@@ -29,6 +29,19 @@ dependencies:
   #跑马灯
   marquee_flutter: ^0.1.2
 
+  # 扩张图片组件
+
+  # pb https://github.com/dart-lang/protobuf
+  protobuf: ^1.1.0
+
+
+  flutter_plugin:
+    path: plugins/flutter_plugin
+
+
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

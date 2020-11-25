@@ -68,7 +68,8 @@ abstract class MyComponentElement extends Element {
     print("performRebuild");
 
     if (!kReleaseMode && debugProfileBuildsEnabled)
-      Timeline.startSync('${widget.runtimeType}',  arguments: timelineWhitelistArguments);
+      ;
+      // Timeline.startSync('${widget.runtimeType}',  arguments: timelineWhitelistArguments);
 
     assert(_debugSetAllowIgnoredCallsToMarkNeedsBuild(true));
     Widget built;
@@ -90,7 +91,7 @@ abstract class MyComponentElement extends Element {
       // We delay marking the element as clean until after calling build() so
       // that attempts to markNeedsBuild() during build() will be ignored.
 //      _dirty = false;
-      dirt = false;
+//       dirt = false;
       assert(_debugSetAllowIgnoredCallsToMarkNeedsBuild(false));
     }
     try {
@@ -150,9 +151,12 @@ class MyStatelessElement extends MyComponentElement {
   void update(StatelessWidget newWidget) {
     super.update(newWidget);
     assert(widget == newWidget);
-    dirt = true;
+    // dirt = true;
     rebuild();
   }
+
+  @override
+  bool get debugDoingBuild => throw UnimplementedError();
 }
 
 
