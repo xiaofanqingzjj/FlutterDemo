@@ -34,7 +34,9 @@ flutter:
     platforms:
       android:
         package: com.example.flutter_plugin
-        pluginClass: FlutterPlugin
+        pluginClass: FlutterPlugin2
+
+
       ios:
         pluginClass: FlutterPlugin
 

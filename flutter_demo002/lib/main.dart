@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo001/HomeListPage.dart';
-import 'package:flutter_demo001/dongtai.dart';
-import 'package:flutter_demo001/mywidgets/testmenu_widget.dart';
-import 'package:flutter_demo001/test/TestListView.dart';
+import 'package:flutter_demo001/hometab/HomeListPage.dart';
+import 'package:flutter_demo001/hometab/dongtai.dart';
 import 'package:flutter_demo001/test/test_menus.dart';
-import 'package:flutter_demo001/test/test_widget.dart';
 
 import 'mywidgets/hometab.dart';
 
@@ -47,22 +44,6 @@ class _MyHomeState extends State<MyHome> {
 
   List<TabInfo> mTabs = [
     TabInfo(
-        name: "星球",
-        icons: {
-          "selected": "images/ic_nav_news_actived.png",
-          "normal": "images/ic_nav_news_normal.png"
-        },
-        content: HomeListPage()
-    ),
-    TabInfo(
-        name: "动态",
-        icons: {
-          "selected": "images/ic_nav_tweet_normal.png",
-          "normal": "images/ic_nav_tweet_normal.png"
-        },
-        content: dongtai()
-    ),
-    TabInfo(
         name: "测试",
         icons: {
           "selected": "images/ic_nav_discover_actived.png",
@@ -71,10 +52,10 @@ class _MyHomeState extends State<MyHome> {
         content: TestMenu()
     ),
     TabInfo(
-        name: "我的",
+        name: "星球",
         icons: {
-          "selected": "images/ic_nav_my_pressed.png",
-          "normal": "images/ic_nav_my_normal.png"
+          "selected": "images/ic_nav_news_actived.png",
+          "normal": "images/ic_nav_news_normal.png"
         },
         content: HomeListPage()
     ),
@@ -83,7 +64,6 @@ class _MyHomeState extends State<MyHome> {
   @override
   void initState() {
     super.initState();
-
     title = mTabs[_initIndex].name;
   }
 

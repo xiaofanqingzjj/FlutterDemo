@@ -1,11 +1,6 @@
-
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 
 ///
 ///
@@ -13,33 +8,30 @@ import 'package:flutter/widgets.dart';
 ///
 ///
 class HomeTabWidget extends StatefulWidget {
-
   final List<TabInfo> mTabs;
 
   final Color themeColor; // = ThemeColorUtils.currentColorTheme;//设置主题标题背景颜色
 
-  TextStyle tabTextStyleSelected = TextStyle(color: const Color(0xff3B9AFF));
-  TextStyle tabTextStyleNormal = TextStyle(color: const Color(0xff969696));
+  final TextStyle tabTextStyleSelected;
 
-  PreferredSizeWidget appBar;
+  final TextStyle tabTextStyleNormal;
 
-  ValueChanged<TabInfo> onTabChange;
+  final PreferredSizeWidget appBar;
 
-  int initIndex = 0;
+  final ValueChanged<TabInfo> onTabChange;
 
-  HomeTabWidget({this.mTabs,
-    this.tabTextStyleSelected,
-    this.tabTextStyleNormal,
+  final int initIndex;
+
+  HomeTabWidget({@required this.mTabs,
+    this.tabTextStyleSelected = const TextStyle(color: const Color(0xff3B9AFF)),
+    this.tabTextStyleNormal = const TextStyle(color: const Color(0xff969696)),
     this.themeColor,
     this.appBar,
     this.onTabChange,
-    this.initIndex
-  });
+    this.initIndex = 0});
 
   @override
   State<StatefulWidget> createState() => _HomeTabWidgetState();
-
-
 }
 
 ///
@@ -53,38 +45,32 @@ class TabInfo {
   TabInfo({this.name, this.icons, this.content});
 }
 
-
 class _HomeTabWidgetState extends State<HomeTabWidget> {
 
-  int _tabIndex = 0;
-  var _body;
-
-  _HomeTabWidgetState() {
-
-  }
-
+  int _currentDisplayTabIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _tabIndex = widget.initIndex;
+    _currentDisplayTabIndex = widget.initIndex;
   }
 
-  Image _getImage(path) {
+  static Image _getImage(path) {
     return Image.asset(path, width: 20.0, height: 20.0);
   }
 
-  TextStyle _getTabTextStyle(int curIndex) {//设置tabbar 选中和未选中的状态文本
-    if (curIndex == _tabIndex) {
+  TextStyle _getTabTextStyle(int curIndex) {
+    if (curIndex == _currentDisplayTabIndex) {
       return widget.tabTextStyleSelected;
     }
     return widget.tabTextStyleNormal;
   }
 
-  Image _getTabIcon(int curIndex) {//设置tabbar选中和未选中的状态图标
+  Image _getTabIcon(int curIndex) {
+    //设置tabbar选中和未选中的状态图标
     var tab = widget.mTabs[curIndex];
 
-    if (curIndex == _tabIndex) {
+    if (curIndex == _currentDisplayTabIndex) {
       return _getImage(tab.icons["selected"]);
     } else {
       return _getImage(tab.icons["normal"]);
@@ -95,52 +81,38 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
     return Text(widget.mTabs[curIndex].name, style: _getTabTextStyle(curIndex));
   }
 
-
   @override
   Widget build(BuildContext context) {
+    final tabs = widget.mTabs;
 
-
-
-    _body = IndexedStack(
-      children: widget.mTabs.map((e) => e.content).toList(),
-      index: _tabIndex,
+    final _body = IndexedStack(
+      children: tabs.map((e) => e.content).toList(),
+      index: _currentDisplayTabIndex,
     );
 
-    return MaterialApp(
-      theme: ThemeData(
-          primaryColor: widget.themeColor
-      ),
-      home: Scaffold(//布局结构
-        appBar: widget.appBar,
-//        appBar:
+    final List<BottomNavigationBarItem> bottomBars = [];
+    for (int i = 0; i < tabs.length; i++) {
+      bottomBars.add(BottomNavigationBarItem(icon: _getTabIcon(i),
+          title: _getTabTitle(i)
+      ));
+    }
 
-        body: _body,
 
-        bottomNavigationBar: CupertinoTabBar(//
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: _getTabIcon(0),
-                title: _getTabTitle(0)),
-            BottomNavigationBarItem(
-                icon: _getTabIcon(1),
-                title: _getTabTitle(1)),
-            BottomNavigationBarItem(
-                icon: _getTabIcon(2),
-                title: _getTabTitle(2)),
-            BottomNavigationBarItem(
-                icon: _getTabIcon(3),
-                title: _getTabTitle(3)),
-          ],
-          currentIndex: _tabIndex,
-          onTap: (index) {
+    return Scaffold(
+      //布局结构
+      appBar: widget.appBar,
+      body: _body,
+      bottomNavigationBar: CupertinoTabBar(
+        //
+        items: bottomBars,
+        currentIndex: _currentDisplayTabIndex,
+        onTap: (index) {
+          setState(() {
+            _currentDisplayTabIndex = index;
+          });
 
-            setState((){
-              _tabIndex = index;
-            });
-
-            widget.onTabChange?.call(widget.mTabs[index]);
-          },
-        ),
+          widget.onTabChange?.call(widget.mTabs[index]);
+        },
       ),
     );
   }

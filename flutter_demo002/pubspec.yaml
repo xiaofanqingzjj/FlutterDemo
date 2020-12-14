@@ -35,8 +35,8 @@ dependencies:
   protobuf: ^1.1.0
 
 
-  flutter_plugin:
-    path: plugins/flutter_plugin
+#  flutter_plugin:
+#    path: plugins/flutter_plugin
 
 
 
