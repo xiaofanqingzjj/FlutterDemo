@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_demo001/myframework/TestMyFramework.dart';
 import 'package:flutter_demo001/mywidgets/testmenu_widget.dart';
+import 'package:flutter_demo001/test/test_inherited_widget.dart';
 import 'package:flutter_demo001/test/test_layout.dart';
+import 'package:flutter_demo001/test/test_render_box.dart';
 import 'package:flutter_demo001/testcanvas/TestCanvas.dart';
 import 'package:flutter_demo001/util/TNavigator.dart';
 
@@ -12,7 +14,9 @@ class TestMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MenuWidget(menus: [
-      Menu("Test"),
+      Menu("TestInheritedWidget", () {
+        TNavigator.push(context, TestInheritedWidget());
+      }),
       Menu("绘制", () {
         TNavigator.push(context, TestPaint());
       }),
@@ -25,7 +29,9 @@ class TestMenu extends StatelessWidget {
       }),
       Menu("Test Layout", () {
         TNavigator.push(context, TestLayout());
-
+      }),
+      Menu("TestRenderBox", () {
+        TNavigator.push(context, TestRenderBox());
       })
     ]);
   }

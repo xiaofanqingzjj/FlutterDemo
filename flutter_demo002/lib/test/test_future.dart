@@ -13,6 +13,9 @@ void main() {
   }).then((value) {
     print("value:$value");
   });
+
+  final r = 3.clamp(1, 200);
+  print("r:$r");
 }
 
 

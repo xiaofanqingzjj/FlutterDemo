@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 ///
@@ -23,7 +24,7 @@ class HomeTabWidget extends StatefulWidget {
   final int initIndex;
 
   HomeTabWidget({@required this.mTabs,
-    this.tabTextStyleSelected = const TextStyle(color: const Color(0xff3B9AFF)),
+    this.tabTextStyleSelected = const TextStyle(color: Colors.red),
     this.tabTextStyleNormal = const TextStyle(color: const Color(0xff969696)),
     this.themeColor,
     this.appBar,
@@ -93,9 +94,16 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
     final List<BottomNavigationBarItem> bottomBars = [];
     for (int i = 0; i < tabs.length; i++) {
       bottomBars.add(BottomNavigationBarItem(icon: _getTabIcon(i),
-          title: _getTabTitle(i)
+          label: tabs[i].name,
+          // title: _getTabTitle(i),
       ));
     }
+
+
+    RenderStack rs;
+    RenderFlex rf;
+
+    BoxConstraints bc;
 
 
     return Scaffold(
@@ -103,14 +111,14 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
       appBar: widget.appBar,
       body: _body,
       bottomNavigationBar: CupertinoTabBar(
-        //
         items: bottomBars,
+        activeColor: Colors.red,
+        inactiveColor: Colors.black,
         currentIndex: _currentDisplayTabIndex,
         onTap: (index) {
           setState(() {
             _currentDisplayTabIndex = index;
           });
-
           widget.onTabChange?.call(widget.mTabs[index]);
         },
       ),

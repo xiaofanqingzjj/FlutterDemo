@@ -17,6 +17,8 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    Row r;
     return MaterialApp(
         home: MyHome(),
     );
@@ -65,6 +67,9 @@ class _MyHomeState extends State<MyHome> {
   void initState() {
     super.initState();
     title = mTabs[_initIndex].name;
+
+    Container c;
+    Image I;
   }
 
   @override
